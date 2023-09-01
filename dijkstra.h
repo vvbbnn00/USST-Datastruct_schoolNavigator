@@ -116,7 +116,7 @@ void dijkstra(int startNode, size_t locationNum, size_t routeNum, DijkstraRoute 
         double minDist = DBL_MAX;
         int currentNode = -1;
 
-        // Find the unvisited node with the smallest distance
+        // 找到最短的未访问节点
         for (int j = 0; j < locationNum; ++j) {
             if (!visited[j] && distances[j] < minDist) {
                 minDist = distances[j];
@@ -130,7 +130,7 @@ void dijkstra(int startNode, size_t locationNum, size_t routeNum, DijkstraRoute 
 
         visited[currentNode] = true;
 
-        // Update distances for neighbors of the current node
+        // 更新邻居节点的距离
         for (int j = 0; j < routeNum; ++j) {
             if (routeList[j].from == currentNode) {
                 int neighbor = routeList[j].to;
