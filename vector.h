@@ -18,14 +18,22 @@ typedef struct {
     size_t capacity;
 } Vector;
 
-// 初始化Vector
+
+/**
+ * 初始化Vector
+ * @param vector
+ */
 void vector_init(Vector *vector) {
     vector->data = NULL;
     vector->size = 0;
     vector->capacity = 0;
 }
 
-// 向Vector添加元素
+/**
+ * 向Vector添加元素
+ * @param vector
+ * @param value
+ */
 void vector_push_back(Vector *vector, void *value) {
     if (vector->size == vector->capacity) {
         vector->capacity = vector->capacity ? vector->capacity * 2 : 1;
@@ -38,7 +46,12 @@ void vector_push_back(Vector *vector, void *value) {
     vector->data[vector->size++] = value;
 }
 
-// 从Vector获取元素
+/**
+ * 从Vector获取元素
+ * @param vector
+ * @param index
+ * @return
+ */
 void *vector_get(Vector *vector, size_t index) {
     if (index >= vector->size) {
         fprintf(stderr, "Index out of bounds\n");
@@ -47,7 +60,10 @@ void *vector_get(Vector *vector, size_t index) {
     return vector->data[index];
 }
 
-// 销毁Vector
+/**
+ * 销毁Vector
+ * @param vector
+ */
 void vector_free(Vector *vector) {
     free(vector->data);
     vector->data = NULL;

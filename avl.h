@@ -54,54 +54,6 @@ IndexListNode *Index_newIndexListNode(int64 hash, IndexType type, void *data) {
 
 
 /**
- * 深复制链表
- * @param node
- * @return
- */
-IndexListNode *IndexListNode_deepCopy(IndexListNode *node) {
-    IndexListNode *newNode = (IndexListNode *) calloc(1, sizeof(IndexListNode));
-    if (!newNode) {
-        return NULL;
-    }
-
-    if (node == NULL) {
-        return newNode;
-    }
-
-    newNode->index.hash = node->index.hash;
-    newNode->index.type = node->index.type;
-    newNode->index.data = node->index.data;
-
-    for (IndexListNode *p = node->next, *q = newNode; p != NULL; p = p->next, q = q->next) {
-        q->next = Index_newIndexListNode(p->index.hash, p->index.type, p->index.data);
-    }
-
-
-    return newNode;
-}
-
-
-/**
- * 删除索引链表
- * @param node
- */
-void IndexListNode_delete(IndexListNode *node) {
-    if (node == NULL) {
-        return;
-    }
-    IndexListNode *p = node;
-    while (p) {
-        IndexListNode *temp = p;
-        p = p->next;
-        if (temp->index.type == INDEX_TYPE_STRING) {
-            safe_free(&temp->index.data);
-        }
-        safe_free(&temp);
-    }
-}
-
-
-/**
  * 获取节点的高度
  * @param node
  * @return
@@ -225,21 +177,6 @@ AVLNode *AVL_insertNode(AVLNode *node, int64 hash, IndexType type, void *data) {
     }
 
     return node;
-}
-
-/**
- * 查找指定哈希值的节点
- * @param node
- * @return
- */
-AVLNode *AVL_minValueNode(AVLNode *node) {
-    AVLNode *current = node;
-
-    while (current->left != NULL) {
-        current = current->left;
-    }
-
-    return current;
 }
 
 /**

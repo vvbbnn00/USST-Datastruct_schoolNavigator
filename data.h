@@ -16,6 +16,13 @@ AVLNode *locationNode = NULL;
 AVLNode *routeIndexNode = NULL;
 Vector *routeNode = NULL;
 
+/**
+ * 添加地点到AVL树
+ * @param id
+ * @param name
+ * @param description
+ * @return
+ */
 bool addLocationToAVL(int id, char *name, char *description) {
     Location *location = calloc(1, sizeof(Location));
     location->id = id;
@@ -25,7 +32,18 @@ bool addLocationToAVL(int id, char *name, char *description) {
     return true;
 }
 
-
+/**
+ * 添加路线到Vector
+ * @param vector
+ * @param startID
+ * @param endId
+ * @param distance
+ * @param hasStairs
+ * @param speed
+ * @param isDouble
+ * @param ...
+ * @return
+ */
 bool addRouteToVector(Vector *vector, int startID, int endId, double distance, bool hasStairs, Speed speed,
                       bool isDouble, ...) {
     Route *route = calloc(1, sizeof(Route));
@@ -76,6 +94,9 @@ bool addRouteToVector(Vector *vector, int startID, int endId, double distance, b
     return true;
 }
 
+/**
+ * 初始化数据
+ */
 void initData() {
     Speed speed = {1.8055, 1.3888, 0.5722, 0.2166}; // m/s
 
